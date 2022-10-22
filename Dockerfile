@@ -17,7 +17,7 @@ COPY ./requirements.dev.txt /tmp/requirements.dev.txt
 COPY ./app /app
 
 # We set the working directory, where commands run from.
-# Automatically runs them from here.
+# Automatically runs them from the following directory.
 WORKDIR /app
 
 # Allows us to acces through that port to the container.
@@ -26,17 +26,18 @@ EXPOSE 8000
 # Set true for DEV ENV, false for PROD ENV
 ARG DEV=false
 
-# We give the commands we need to run: creating a virtualenv, 
-# installing & upgrading dependencies/pip, build for both environments
-# (dev/prod),  remove tmp directory (no extra deps - keep it lightweight) 
-# & add a user for the docker image.
+# We give the commands we need to run.
 RUN python -m venv /py && \
     /py/bin/pip install --upgrade pip && \
+    apk add --update --no-cache postgresql-client && \
+    apk add --update --no-cache --virtual .tmp-build-deps \
+    build-base postgresql-dev musl-dev && \
     /py/bin/pip install -r /tmp/requirements.txt && \
     if [ $DEV = "true" ]; \
         then /py/bin/pip install -r /tmp/requirements.dev.txt ; \
     fi && \
     rm -rf /tmp && \
+    apk del .tmp-build-deps && \
     adduser \
     -D \
     -H \
