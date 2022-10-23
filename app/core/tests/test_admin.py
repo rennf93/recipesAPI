@@ -1,7 +1,7 @@
 """
 Tests for the Django admin modifications.
 """
-# noqa
+
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.urls import reverse
@@ -15,7 +15,7 @@ class AdminSiteTests(TestCase):
         """Create user and client."""
 
         self.client = Client()
-        self.admin_user = get_user_model().objects.create_superuser(  # type: ignore
+        self.admin_user = get_user_model().objects.create_superuser(  # type: ignore  # noqa
             email='admin@example.com',
             password='testpass123',
         )
