@@ -32,7 +32,7 @@ class ModelTests(TestCase):
             ['test4@example.COM', 'test4@example.com'],
         ]
         for email, expected in sample_emails:
-            user = get_user_model().objects.create_user( # type: ignore
+            user = get_user_model().objects.create_user(  # type: ignore
                 email, 'sample123'
                 )
 
