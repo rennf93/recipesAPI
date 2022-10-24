@@ -1,4 +1,5 @@
 # pylint: disable=import-error
+# pylint: disable=invalid-name
 """
 Tests for recipe APIs.
 """
