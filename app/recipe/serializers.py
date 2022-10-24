@@ -35,7 +35,7 @@ class RecipeDetailSerializer(RecipeSerializer):
             'time_minutes': 30,
             'price': Decimal('5.99'),
         }
-        res = self.client.post(RECIPES_URL, payload)  # type: ignore  # noqa: F821
+        res = self.client.post(RECIPES_URL, payload)  # type: ignore  # noqa
 
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)  # type: ignore  # noqa
         recipe = Recipe.objects.get(id=res.data['id'])
