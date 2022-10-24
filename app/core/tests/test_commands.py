@@ -1,3 +1,4 @@
+# pylint: disable=unused-argument
 """
 Test custom Django managements commands
 """
