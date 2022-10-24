@@ -89,7 +89,10 @@ class PrivateRecipeApiTests(TestCase):
     def test_recipe_list_limited_to_user(self):
         """Test list of recipes is limited to authenticated user."""
 
-        other_user = other_user = create_user(email='other@example.com', password='test123')
+        other_user = other_user = create_user(
+            email='other@example.com',
+            password='test123'
+            )
         create_recipe(user=other_user)
         create_recipe(user=self.user)
 
@@ -192,7 +195,7 @@ class PrivateRecipeApiTests(TestCase):
         recipe = create_recipe(user=self.user)
 
         url = detail_url(recipe.id)  # type: ignore
-        res = self.client.delete(url)
+        res = self.client.delete(url)  # noqa
 
         self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
         self.assertFalse(Recipe.objects.filter(id=recipe.id).exists())  # type: ignore
@@ -204,7 +207,7 @@ class PrivateRecipeApiTests(TestCase):
         recipe = create_recipe(user=new_user)
 
         url = detail_url(recipe.id)  # type: ignore
-        res = self.client.delete(url)
+        res = self.client.delete(url)  # noqa
 
         self.assertEqual(res.status_code, status.HTTP_404_NOT_FOUND)
         self.assertTrue(Recipe.objects.filter(id=recipe.id).exists())  # type: ignore

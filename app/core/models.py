@@ -5,7 +5,7 @@ Database models.
 
 # from unittest.util import _MAX_LENGTH
 from django.conf import settings
-from django.db import models
+from django.db import models  # noqa: F401
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
